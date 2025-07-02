@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ваши записи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .patient-info {
+            text-align: right;
+            padding: 10px 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 80%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        a {
+            margin-top: 20px;
+            text-decoration: none;
+            color: #3366cc;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="patient-info">
+    <strong th:text="${patient.name}">Имя</strong><br>
+    <span th:text="${patient.email}">email</span>
+</div>
+
+<div class="container">
+    <h1>Ваши записи к врачу</h1>
+
+    <table>
+        <tr>
+            <th>Врач</th>
+            <th>Дата и время</th>
+            <th>Действие</th>
+        </tr>
+        <tr th:each="a : ${appointments}">
+            <td th:text="${a.doctor.name}"></td>
+            <td th:text="${#temporals.format(a.dateTime, 'dd.MM.yyyy HH:mm')}"></td>
+            <td>
+                <form th:action="@{/cancel-appointment}" method="post" style="margin: 0;">
+                    <input type="hidden" name="appointmentId" th:value="${a.id}" />
+                    <input type="hidden" name="patientId" th:value="${patientId}" />
+                    <button type="submit">Отменить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <a th:href="@{'/select-doctor'(patientId=${patientId})}">← Назад к выбору врача</a>
+</div>
+
+</body>
+</html>

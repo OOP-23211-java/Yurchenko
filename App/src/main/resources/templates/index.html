@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Запись к врачу</title>
+</head>
+<body>
+<h1>Записаться на приём</h1>
+
+<form method="post" action="/appointment">
+    Пациент:
+    <select name="patientId">
+        <option th:each="p : ${patients}" th:value="${p.id}" th:text="${p.name}"></option>
+    </select><br><br>
+
+    Врач:
+    <select name="doctorId">
+        <option th:each="d : ${doctors}" th:value="${d.id}" th:text="${d.name + ' - ' + d.specialization}"></option>
+    </select><br><br>
+
+    Дата и время (формат: 2025-06-10T14:30):
+    <input name="dateTime" type="text"><br><br>
+
+    <button type="submit">Записаться</button>
+</form>
+
+</body>
+</html>
