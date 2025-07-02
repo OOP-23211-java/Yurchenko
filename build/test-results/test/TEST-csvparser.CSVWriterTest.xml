@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="csvparser.CSVWriterTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-07-02T14:58:33" hostname="WIN-J304KLVAMMJ" time="0.028">
+  <properties/>
+  <testcase name="testWriteCSVCreatesCorrectFile()" classname="csvparser.CSVWriterTest" time="0.021"/>
+  <testcase name="testWriteCSVWithEmptyStats()" classname="csvparser.CSVWriterTest" time="0.002"/>
+  <testcase name="testWriteCSVWithZeroTotalWords()" classname="csvparser.CSVWriterTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
