@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Выбор врача</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .patient-info {
+            text-align: right;
+            padding: 10px 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label, select, button {
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="patient-info">
+    <strong th:text="${patient.name}">Имя</strong><br>
+    <span th:text="${patient.email}">email</span>
+</div>
+
+<div class="container">
+    <p th:if="${error}" th:text="${error}" style="color:red; font-weight: bold;"></p>
+
+    <form method="post" action="/appointment">
+        <input type="hidden" name="patientId" th:value="${patientId}" />
+
+        <label for="doctorId">Врач:</label>
+        <select name="doctorId" id="doctorId">
+            <option th:each="d : ${doctors}"
+                    th:value="${d.id}"
+                    th:text="${d.name + ' - ' + d.specialization}"
+                    th:selected="${d.id == selectedDoctorId}">
+            </option>
+        </select>
+
+        <label for="date">Дата:</label>
+        <select name="date" id="date">
+            <option th:each="d : ${dates}"
+                    th:value="${d}"
+                    th:text="${d}"
+                    th:selected="${d == selectedDate}">
+            </option>
+        </select>
+
+        <label for="time">Время:</label>
+        <select name="time" id="time">
+            <option th:each="t : ${times}"
+                    th:value="${t}"
+                    th:text="${t}"
+                    th:selected="${t == selectedTime}">
+            </option>
+        </select>
+
+        <br>
+        <button type="submit">Записаться</button>
+    </form>
+</div>
+
+</body>
+</html>
